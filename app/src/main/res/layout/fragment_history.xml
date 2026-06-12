@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fichier : app/src/main/res/layout/fragment_history.xml -->
+<!-- Écran historique : RecyclerView + FloatingActionButton (cours chapitre 7) -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.HistoryFragment">
+
+    <!--
+        RecyclerView pour la liste de l'historique des scans.
+        Comme dans le cours chapitre 7 (RecyclerView).
+    -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/historyRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/view_holder_scan"
+        tools:itemCount="5" />
+
+    <!-- Message affiché si l'historique est vide -->
+    <TextView
+        android:id="@+id/emptyHistoryText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/empty_history_message"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <!--
+        FloatingActionButton pour supprimer tout l'historique.
+        Placé en bas à droite de la RecyclerView (cours chapitre 7).
+    -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clearHistoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete"
+        android:contentDescription="@string/clear_history_button"
+        app:layout_anchor="@id/historyRecyclerView"
+        app:layout_anchorGravity="bottom|end"
+        app:useCompatPadding="true" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

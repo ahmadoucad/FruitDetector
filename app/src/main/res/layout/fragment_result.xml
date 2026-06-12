@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fichier : app/src/main/res/layout/fragment_result.xml -->
+<!-- Écran résultat : fiche détaillée du fruit/légume détecté -->
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Image scannée -->
+        <ImageView
+            android:id="@+id/scannedImageView"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/scanned_image_description"
+            android:layout_marginBottom="16dp"
+            android:background="#F0F0F0" />
+
+        <!-- Nom du fruit détecté -->
+        <TextView
+            android:id="@+id/fruitNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"
+            tools:text="🍎 Pomme" />
+
+        <!-- Score de confiance -->
+        <TextView
+            android:id="@+id/confidenceText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"
+            tools:text="Confiance : 97%" />
+
+        <!-- Séparateur -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Section : top 3 des résultats -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/top_results_title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/topResult1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"
+            tools:text="1. Pomme — 97%" />
+
+        <TextView
+            android:id="@+id/topResult2Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"
+            tools:text="2. Poire — 2%" />
+
+        <TextView
+            android:id="@+id/topResult3Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp"
+            tools:text="3. Prune — 1%" />
+
+        <!-- Séparateur -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Section : informations nutritionnelles -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nutrition_title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- ProgressBar pendant le chargement de l'API -->
+        <ProgressBar
+            android:id="@+id/nutritionLoadingProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+        <!-- Contenu nutritionnel (affiché après chargement API) -->
+        <LinearLayout
+            android:id="@+id/nutritionContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/caloriesText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp"
+                tools:text="🔥 Calories : 52 kcal" />
+
+            <TextView
+                android:id="@+id/carbsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp"
+                tools:text="🍞 Glucides : 14 g" />
+
+            <TextView
+                android:id="@+id/fibersText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp"
+                tools:text="🌿 Fibres : 2.4 g" />
+
+            <TextView
+                android:id="@+id/vitaminCText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"
+                tools:text="💊 Vitamine C : 5 mg" />
+
+        </LinearLayout>
+
+        <!-- Séparateur -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Section : bienfaits -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/benefits_title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/benefitsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp"
+            tools:text="✅ Bonne pour la digestion\n✅ Riche en Vitamine C\n✅ Faible en calories" />
+
+        <!-- Bouton retour à l'accueil (violet plein) -->
+        <Button
+            android:id="@+id/backToHomeButton"
+            style="@style/FruitButton.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back_to_home_button"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Bouton scanner à nouveau (contour violet) -->
+        <Button
+            android:id="@+id/scanAgainButton"
+            style="@style/FruitButton.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_again_button" />
+
+    </LinearLayout>
+
+</ScrollView>

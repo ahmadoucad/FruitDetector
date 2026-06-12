@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fichier : app/src/main/res/values/strings.xml -->
+
+<resources>
+    <string name="app_name">Fruit Detector</string>
+    <string name="app_title"> Fruit Detector</string>
+    <string name="app_subtitle">Identifiez vos fruits et légumes\nen un instant</string>
+
+    <!-- Boutons accueil -->
+    <string name="gallery_button_text">Choisir depuis la galerie</string>
+    <string name="camera_button_text">Scanner avec la caméra</string>
+    <string name="history_button_text">Voir l\'historique</string>
+
+    <!-- Écran caméra -->
+    <string name="no_detection_message">Pointez la caméra vers un seul fruit ou légume</string>
+    <string name="view_details_button">Voir la fiche complète</string>
+
+    <!-- Écran résultat -->
+    <string name="top_results_title">Top résultats</string>
+    <string name="nutrition_title">Informations nutritionnelles</string>
+    <string name="benefits_title">Bienfaits</string>
+    <string name="back_to_home_button">Retour à l\'accueil</string>
+    <string name="scan_again_button">Scanner à nouveau</string>
+    <string name="scanned_image_description">Image du fruit ou légume scanné</string>
+    <string name="confidence_text">Confiance : %1$.0f%%</string>
+    <string name="below_threshold_message">Aucun fruit ou légume détecté.\nVeuillez présenter un seul élément à la fois.</string>
+
+    <!-- Informations nutritionnelles -->
+    <string name="calories_text">🔥 Calories : %1$.0f kcal</string>
+    <string name="carbs_text">🍞 Glucides : %1$.1f g</string>
+    <string name="fibers_text">🌿 Fibres : %1$.1f g</string>
+    <string name="vitamin_c_text">💊 Vitamine C : %1$.0f mg</string>
+    <string name="nutrition_unavailable">Données nutritionnelles non disponibles</string>
+
+    <!-- Écran historique -->
+    <string name="empty_history_message">Aucun scan effectué pour l\'instant.\nCommencez par scanner un fruit ou légume !</string>
+    <string name="clear_history_button">Supprimer l\'historique</string>
+    <string name="history_confidence_text">%1$.0f%%</string>
+
+    <!-- Permissions -->
+    <string name="camera_permission_denied">Permission caméra refusée. Veuillez l\'autoriser dans les paramètres.</string>
+    <string name="gallery_permission_denied">Permission galerie refusée. Veuillez l\'autoriser dans les paramètres.</string>
+
+</resources>

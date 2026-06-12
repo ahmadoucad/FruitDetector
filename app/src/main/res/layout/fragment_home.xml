@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fichier : app/src/main/res/layout/fragment_home.xml -->
+<!-- Écran d'accueil harmonisé avec le design FruitScan -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="@color/fruit_background"
+    tools:context=".view.HomeFragment">
+
+    <!-- Titre de l'application (vert FruitScan) -->
+    <TextView
+        android:id="@+id/appTitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_title"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/fruit_green"
+        android:gravity="center"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Sous-titre -->
+    <TextView
+        android:id="@+id/appSubtitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_subtitle"
+        android:textSize="16sp"
+        android:textColor="@color/fruit_text_secondary"
+        android:gravity="center"
+        android:layout_marginBottom="48dp" />
+
+    <!-- Bouton : choisir une image depuis la galerie (violet plein) -->
+    <Button
+        android:id="@+id/galleryButton"
+        style="@style/FruitButton.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery_button_text"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Bouton : scanner avec la caméra (violet plein) -->
+    <Button
+        android:id="@+id/cameraButton"
+        style="@style/FruitButton.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/camera_button_text"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Bouton : voir l'historique (contour violet) -->
+    <Button
+        android:id="@+id/historyButton"
+        style="@style/FruitButton.Outlined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/history_button_text" />
+
+</LinearLayout>
