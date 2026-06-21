@@ -40,16 +40,16 @@ class YoloDetector @Inject constructor(
     companion object {
         private const val TAG = "YoloDebug"
 
-        private const val MODEL_FILE = "yolo.tflite"
-        private const val LABELS_FILE = "labels_yolo.txt"
+        private const val MODEL_FILE = "yolo_fruit_model.tflite"
+        private const val LABELS_FILE = "yolo_fruit_labels.txt"
 
-        // Taille d'entrée du modèle (320x320)
-        private const val INPUT_SIZE = 320
+        // Taille d'entrée du modèle (640x640)
+        private const val INPUT_SIZE = 640
 
-        // Dimensions de la sortie [1, 84, 2100]
-        private const val NUM_VALUES = 84      // 4 boîte + 80 classes
-        private const val NUM_BOXES = 2100     // nombre de boîtes candidates
-        private const val NUM_CLASSES = 80
+        // Dimensions de la sortie [1, 39, 8400]
+        private const val NUM_VALUES = 39      // 4 boîte + 35 classes
+        private const val NUM_BOXES = 8400     // nombre de boîtes candidates
+        private const val NUM_CLASSES = 35
 
         // Seuils de filtrage
         private const val CONFIDENCE_THRESHOLD = 0.40f  // score minimum pour garder une boîte

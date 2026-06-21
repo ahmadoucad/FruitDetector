@@ -48,5 +48,7 @@
     <!-- Permissions -->
     <string name="camera_permission_denied">Permission caméra refusée. Veuillez l\'autoriser dans les paramètres.</string>
     <string name="gallery_permission_denied">Permission galerie refusée. Veuillez l\'autoriser dans les paramètres.</string>
+    
+    <string name="detection_camera_button">📷 Détecter avec la caméra</string>
 
 </resources>

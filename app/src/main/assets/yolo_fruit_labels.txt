@@ -1,0 +1,35 @@
+Bitter melon
+Brinjal
+Cabbage
+Calabash
+Capsicum
+Cauliflower
+Garlic
+Ginger
+Green Chili
+Lady finger
+Onion
+Potato
+Sponge Gourd
+Tomato
+apple
+apricots
+banana
+bell_pepper
+bitter_gourd
+carrot
+coconut
+cucumber
+dragon fruit
+grapes
+guava
+kiwi
+lemon
+orange
+oren
+peach
+pear
+pineapple
+strawberry
+sugar apple
+zucchini

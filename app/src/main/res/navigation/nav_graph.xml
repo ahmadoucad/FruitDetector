@@ -72,7 +72,23 @@
         android:id="@+id/detectionFragment"
         android:name="fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view.DetectionFragment"
         android:label="DetectionFragment"
-        tools:layout="@layout/fragment_detection" />
+        tools:layout="@layout/fragment_detection">
 
+        <!-- Navigation vers la détection caméra -->
+        <action
+            android:id="@+id/action_detectionFragment_to_detectionCameraFragment"
+            app:destination="@id/detectionCameraFragment" />
+
+    </fragment>
+
+    <!-- Écran de détection caméra temps réel -->
+    <fragment
+        android:id="@+id/detectionCameraFragment"
+        android:name="fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view.DetectionCameraFragment"
+        android:label="DetectionCameraFragment"
+        tools:layout="@layout/fragment_detection_camera" />
 
 </navigation>
+
+
+

@@ -66,6 +66,15 @@
         android:text="@string/gallery_button_text"
         android:layout_marginBottom="12dp" />
 
+    <!-- Bouton : détection en caméra temps réel -->
+    <Button
+        android:id="@+id/detectionCameraButton"
+        style="@style/FruitButton.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detection_camera_button"
+        android:layout_marginBottom="12dp" />
+
     <!-- Bouton : retour à l'accueil -->
     <Button
         android:id="@+id/detectionBackButton"

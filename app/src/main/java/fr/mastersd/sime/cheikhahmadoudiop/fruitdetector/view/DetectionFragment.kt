@@ -90,6 +90,13 @@ class DetectionFragment : Fragment() {
             galleryLauncher.launch(intent)
         }
 
+        // Bouton caméra : détection en temps réel
+        binding.detectionCameraButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_detectionFragment_to_detectionCameraFragment
+            )
+        }
+
         // Bouton retour à l'accueil
         binding.detectionBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
