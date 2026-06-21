@@ -103,6 +103,14 @@ class HomeFragment : Fragment() {
             )
         }
 
+
+        // Bouton détection : navigation vers DetectionFragment (YOLO)
+        binding.detectionButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_homeFragment_to_detectionFragment
+            )
+        }
+
         // Bouton historique : navigation vers HistoryFragment
         binding.historyButton.setOnClickListener {
             findNavController().navigate(

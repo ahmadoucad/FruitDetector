@@ -117,13 +117,17 @@ class ResultFragment : Fragment() {
         // Mémorise le fruit courant pour les valeurs de repli (stratégie hybride)
         fruitCourant = result.fruitName
 
+        // On AFFICHE toute la partie détails (top 3, nutrition, bienfaits)
+        binding.detailsContent.visibility = View.VISIBLE
+        binding.confidenceText.visibility = View.VISIBLE
+
         // Nom principal : version simplifiée et traduite en français
         // (ex: "Banana Lady Finger" -> "Banane")
         binding.fruitNameText.text = nomFrancaisSimple(result.fruitName)
+        binding.fruitNameText.textSize = 28f
         binding.confidenceText.text = getString(
             R.string.confidence_text, result.confidence * 100
         )
-        binding.confidenceText.visibility = View.VISIBLE
 
         // Réaffiche les éléments (au cas où ils auraient été masqués)
         binding.topResult1Text.visibility = View.VISIBLE
@@ -175,15 +179,19 @@ class ResultFragment : Fragment() {
         binding.vitaminCText.text = getString(R.string.vitamin_c_text, vitamineC)
     }
 
+    /**
+     * Affiche un message simple quand ce n'est PAS un fruit/légume.
+     * On masque toute la partie détails (top 3, nutrition, bienfaits)
+     * pour ne laisser que l'image et le message.
+     */
     private fun afficherEchecDetection() {
+        // Message simple et clair
         binding.fruitNameText.text = getString(R.string.below_threshold_message)
+        binding.fruitNameText.textSize = 18f
+
+        // On masque le score de confiance et toute la section détails
         binding.confidenceText.visibility = View.GONE
-        binding.topResult1Text.visibility = View.GONE
-        binding.topResult2Text.visibility = View.GONE
-        binding.topResult3Text.visibility = View.GONE
-        binding.nutritionLoadingProgress.visibility = View.GONE
-        binding.nutritionContent.visibility = View.GONE
-        binding.benefitsText.text = ""
+        binding.detailsContent.visibility = View.GONE
     }
 
     /**
@@ -194,24 +202,24 @@ class ResultFragment : Fragment() {
     private fun valeursCodees(fruitName: String): List<Float> {
         return when {
             fruitName.contains("pomme", ignoreCase = true) ||
-                    fruitName.contains("apple", ignoreCase = true) ->
+            fruitName.contains("apple", ignoreCase = true) ->
                 listOf(52f, 14f, 2.4f, 5f)
             fruitName.contains("banane", ignoreCase = true) ||
-                    fruitName.contains("banana", ignoreCase = true) ->
+            fruitName.contains("banana", ignoreCase = true) ->
                 listOf(89f, 23f, 2.6f, 9f)
             fruitName.contains("orange", ignoreCase = true) ->
                 listOf(47f, 12f, 2.4f, 53f)
             fruitName.contains("fraise", ignoreCase = true) ||
-                    fruitName.contains("strawberry", ignoreCase = true) ->
+            fruitName.contains("strawberry", ignoreCase = true) ->
                 listOf(32f, 8f, 2f, 59f)
             fruitName.contains("tomate", ignoreCase = true) ||
-                    fruitName.contains("tomato", ignoreCase = true) ->
+            fruitName.contains("tomato", ignoreCase = true) ->
                 listOf(18f, 4f, 1.2f, 14f)
             fruitName.contains("carotte", ignoreCase = true) ||
-                    fruitName.contains("carrot", ignoreCase = true) ->
+            fruitName.contains("carrot", ignoreCase = true) ->
                 listOf(41f, 10f, 2.8f, 6f)
             fruitName.contains("onion", ignoreCase = true) ||
-                    fruitName.contains("oignon", ignoreCase = true) ->
+            fruitName.contains("oignon", ignoreCase = true) ->
                 listOf(40f, 9f, 1.7f, 7f)
             else -> listOf(50f, 12f, 2f, 10f)
         }
@@ -291,24 +299,24 @@ class ResultFragment : Fragment() {
     private fun getBienfaits(fruitName: String): String {
         return when {
             fruitName.contains("pomme", ignoreCase = true) ||
-                    fruitName.contains("apple", ignoreCase = true) ->
+            fruitName.contains("apple", ignoreCase = true) ->
                 "✅ Bonne pour la digestion\n✅ Riche en Vitamine C\n✅ Faible en calories"
             fruitName.contains("banane", ignoreCase = true) ||
-                    fruitName.contains("banana", ignoreCase = true) ->
+            fruitName.contains("banana", ignoreCase = true) ->
                 "✅ Riche en potassium\n✅ Source d'énergie rapide\n✅ Bonne pour les muscles"
             fruitName.contains("orange", ignoreCase = true) ->
                 "✅ Très riche en Vitamine C\n✅ Renforce l'immunité\n✅ Bonne hydratation"
             fruitName.contains("fraise", ignoreCase = true) ||
-                    fruitName.contains("strawberry", ignoreCase = true) ->
+            fruitName.contains("strawberry", ignoreCase = true) ->
                 "✅ Riche en antioxydants\n✅ Faible en calories\n✅ Bonne pour la peau"
             fruitName.contains("tomate", ignoreCase = true) ||
-                    fruitName.contains("tomato", ignoreCase = true) ->
+            fruitName.contains("tomato", ignoreCase = true) ->
                 "✅ Riche en lycopène\n✅ Bonne pour le cœur\n✅ Source de Vitamine A"
             fruitName.contains("carotte", ignoreCase = true) ||
-                    fruitName.contains("carrot", ignoreCase = true) ->
+            fruitName.contains("carrot", ignoreCase = true) ->
                 "✅ Riche en bêta-carotène\n✅ Bonne pour la vue\n✅ Renforce l'immunité"
             fruitName.contains("onion", ignoreCase = true) ||
-                    fruitName.contains("oignon", ignoreCase = true) ->
+            fruitName.contains("oignon", ignoreCase = true) ->
                 "✅ Riche en antioxydants\n✅ Bon pour le cœur\n✅ Propriétés anti-inflammatoires"
             else ->
                 "✅ Source de vitamines et minéraux\n✅ Recommandé dans une alimentation équilibrée"

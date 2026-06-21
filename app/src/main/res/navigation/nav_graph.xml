@@ -31,6 +31,12 @@
             android:id="@+id/action_homeFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
 
+        <!-- Navigation vers la détection YOLO -->
+        <action
+            android:id="@+id/action_homeFragment_to_detectionFragment"
+            app:destination="@id/detectionFragment" />
+
+
     </fragment>
 
     <!-- Écran caméra en temps réel -->
@@ -60,5 +66,13 @@
         android:name="fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view.HistoryFragment"
         android:label="HistoryFragment"
         tools:layout="@layout/fragment_history" />
+
+    <!-- Écran de détection YOLO (partie 2) -->
+    <fragment
+        android:id="@+id/detectionFragment"
+        android:name="fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view.DetectionFragment"
+        android:label="DetectionFragment"
+        tools:layout="@layout/fragment_detection" />
+
 
 </navigation>

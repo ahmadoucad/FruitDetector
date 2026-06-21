@@ -37,7 +37,8 @@ class FruitDetectorImpl @Inject constructor(
     companion object {
         private const val TAG = "FruitDebug"
 
-        // Seuil de confiance minimum : 60% comme défini dans le projet
+        // Seuil de confiance minimum. Avec la classe "Autre", c'est le modèle
+        // qui distingue fruit/non-fruit, donc on peut garder un seuil raisonnable.
         private const val CONFIDENCE_THRESHOLD = 0.60f
 
         // Fichiers dans assets/
@@ -148,15 +149,28 @@ class FruitDetectorImpl @Inject constructor(
                 }
 
                 val meilleur = resultats.first()
+                val deuxieme = if (resultats.size > 1) resultats[1] else null
+
+                // Écart entre le 1er et le 2e résultat
+                val ecart = meilleur.confidence - (deuxieme?.confidence ?: 0f)
+
                 Log.d(
                     TAG,
                     "Meilleur : '${meilleur.fruitName}' a ${"%.1f".format(meilleur.confidence * 100)}% " +
-                            "(seuil ${"%.0f".format(CONFIDENCE_THRESHOLD * 100)}%)"
+                            "| ecart avec 2e = ${"%.1f".format(ecart * 100)}%"
                 )
 
-                // 7. Décision selon le seuil de confiance
+                // 7a. NOUVEAU : si le modèle a classé l'image comme "Autre"
+                //     (= ce n'est pas un fruit/légume), on rejette directement.
+                //     C'est la classe spéciale ajoutée lors du ré-entraînement.
+                if (meilleur.fruitName.equals("Autre", ignoreCase = true)) {
+                    Log.d(TAG, "DECISION : BelowThreshold (classe 'Autre' = pas un fruit)")
+                    return@withContext FruitDetectionResult.BelowThreshold
+                }
+
+                // 7b. Décision selon le seuil de confiance.
                 if (meilleur.confidence < CONFIDENCE_THRESHOLD) {
-                    Log.d(TAG, "DECISION : BelowThreshold")
+                    Log.d(TAG, "DECISION : BelowThreshold (score sous le seuil)")
                     return@withContext FruitDetectionResult.BelowThreshold
                 }
 

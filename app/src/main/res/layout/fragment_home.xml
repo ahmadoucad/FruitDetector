@@ -52,6 +52,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/camera_button_text"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Bouton : détection YOLO (violet plein) -->
+    <Button
+        android:id="@+id/detectionButton"
+        style="@style/FruitButton.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detection_button_text"
         android:layout_marginBottom="32dp" />
 
     <!-- Bouton : voir l'historique (contour violet) -->

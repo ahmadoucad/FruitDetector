@@ -30,6 +30,7 @@ Apple Red Delicious 1
 Apple Red Yellow 1
 Apple Red Yellow 2
 Apricot 1
+Autre
 Avocado 1
 Avocado 2
 Avocado Black 1

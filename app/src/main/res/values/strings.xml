@@ -20,10 +20,18 @@
     <string name="nutrition_title">Informations nutritionnelles</string>
     <string name="benefits_title">Bienfaits</string>
     <string name="back_to_home_button">Retour à l\'accueil</string>
+    
+    <!-- Détection YOLO -->
+    <string name="detection_title">🔍 Détection d\'objets</string>
+    <string name="detection_button_text">🔍 Détecter plusieurs objets</string>
+    <string name="detection_in_progress">Analyse en cours…</string>
+    <string name="detection_none">Aucun objet détecté</string>
+    <string name="detection_count">%1$d objet(s) détecté(s)</string>
+
     <string name="scan_again_button">Scanner à nouveau</string>
     <string name="scanned_image_description">Image du fruit ou légume scanné</string>
     <string name="confidence_text">Confiance : %1$.0f%%</string>
-    <string name="below_threshold_message">Aucun fruit ou légume détecté.\nVeuillez présenter un seul élément à la fois.</string>
+    <string name="below_threshold_message">Aucun fruit ou légume détecté</string>
 
     <!-- Informations nutritionnelles -->
     <string name="calories_text">🔥 Calories : %1$.0f kcal</string>

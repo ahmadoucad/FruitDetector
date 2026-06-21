@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fichier : app/src/main/res/layout/fragment_detection.xml -->
+<!-- Écran de détection YOLO : image + cadres dessinés par-dessus -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/fruit_background"
+    tools:context=".view.DetectionFragment">
+
+    <!-- Titre -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detection_title"
+        android:textSize="22sp"
+        android:textColor="@color/fruit_green"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Zone image + overlay (les cadres se dessinent par-dessus l'image) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"
+        android:background="#F0F0F0">
+
+        <!-- L'image scannée -->
+        <ImageView
+            android:id="@+id/detectionImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/scanned_image_description" />
+
+        <!-- L'overlay qui dessine les cadres (transparent, par-dessus) -->
+        <fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view.BoxOverlayView
+            android:id="@+id/boxOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <!-- Message de résultat (nombre d'objets détectés) -->
+    <TextView
+        android:id="@+id/detectionResultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/fruit_text_primary"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        tools:text="2 objets détectés" />
+
+    <!-- Bouton : choisir une image -->
+    <Button
+        android:id="@+id/detectionGalleryButton"
+        style="@style/FruitButton.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery_button_text"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Bouton : retour à l'accueil -->
+    <Button
+        android:id="@+id/detectionBackButton"
+        style="@style/FruitButton.Outlined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back_to_home_button" />
+
+</LinearLayout>
