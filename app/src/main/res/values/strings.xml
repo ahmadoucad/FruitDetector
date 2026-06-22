@@ -50,5 +50,20 @@
     <string name="gallery_permission_denied">Permission galerie refusée. Veuillez l\'autoriser dans les paramètres.</string>
     
     <string name="detection_camera_button">📷 Détecter avec la caméra</string>
+    
+    <!-- Authentification (Login / Register) -->
+    <string name="login_subtitle">Connectez-vous pour commencer</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Mot de passe</string>
+    <string name="login_button">Se connecter</string>
+    <string name="register_link">Pas de compte ? Créer un compte</string>
+    <string name="register_title">Créer un compte</string>
+    <string name="hint_name">Nom complet</string>
+    <string name="hint_confirm_password">Confirmer le mot de passe</string>
+    <string name="register_button">S\'inscrire</string>
+    <string name="login_link">Déjà un compte ? Se connecter</string>
+
+    <!-- Détection -->
+    <string name="logout_button">Se déconnecter</string>
 
 </resources>

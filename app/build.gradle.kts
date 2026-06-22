@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)    // Pour @Parcelize sur les sealed interfaces
     alias(libs.plugins.dagger.hilt)         // Injection de dépendances
     alias(libs.plugins.androidx.navigation.safeargs) // Navigation safe args
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -15,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId = "fr.mastersd.sime.cheikhahmadoudiop.fruitdetector"
-        minSdk = 21                         // Android 5.0 comme recommandé dans le cours
+        minSdk = 23                         // Android 5.0 comme recommandé dans le cours
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -88,6 +89,7 @@ dependencies {
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
+    implementation("com.google.guava:guava:33.0.0-android") 
 
     // TensorFlow Lite (Interpreter classique pour la classification)
     // On utilise uniquement l'Interpreter, pas la Task Library,
@@ -101,4 +103,9 @@ dependencies {
 
     // RecyclerView (liste de l'historique)
     implementation(libs.androidx.recyclerview)
+    
+    // Firebase (Authentication)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
 }

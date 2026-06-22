@@ -3,6 +3,7 @@
 package fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view
 
 
+
 import androidx.fragment.app.activityViewModels
 import android.app.Activity
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
+import com.google.firebase.auth.FirebaseAuth
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
@@ -116,6 +118,16 @@ class HomeFragment : Fragment() {
             findNavController().navigate(
                 R.id.action_homeFragment_to_historyFragment
             )
+        }
+
+        // Bouton de déconnexion
+        binding.logoutButton.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            // Retour à l'écran de connexion
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            requireActivity().finish()
         }
 
         // Observation de l'événement de navigation (one-shot)

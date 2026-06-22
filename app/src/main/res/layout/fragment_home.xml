@@ -71,4 +71,15 @@
         android:layout_height="wrap_content"
         android:text="@string/history_button_text" />
 
+
+    <!-- AJOUTER : Bouton de déconnexion -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logout_button"
+        android:textColor="@color/fruit_purple_text"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="24dp" />
+
 </LinearLayout>

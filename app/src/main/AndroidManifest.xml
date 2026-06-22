@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Fichier : app/src/main/AndroidManifest.xml -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Permission caméra (mode temps réel) -->
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <!-- Permission internet (API Open Food Facts) -->
+    <!-- Permission internet (API Open Food Facts + Firebase) -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Permission lecture galerie (mode image) -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
@@ -32,14 +32,21 @@
         android:theme="@style/Theme.FruitDetector"
         android:usesCleartextTraffic="false">
 
+        <!-- LoginActivity = NOUVEAU point d'entrée (vérifie si connecté) -->
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- RegisterActivity (inscription) -->
+        <activity android:name=".view.RegisterActivity" />
+
+        <!-- MainActivity n'est PLUS le point d'entrée (juste déclarée) -->
+        <activity android:name=".view.MainActivity" />
 
     </application>
 
