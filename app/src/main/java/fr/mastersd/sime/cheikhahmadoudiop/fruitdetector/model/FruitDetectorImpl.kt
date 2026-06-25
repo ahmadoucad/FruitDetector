@@ -1,4 +1,4 @@
-// Fichier : app/src/main/java/fr/mastersd/sime/cheikhahmadoudiop/fruitdetector/model/FruitDetectorImpl.kt
+
 
 package fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.model
 
@@ -16,20 +16,7 @@ import java.nio.ByteOrder
 import java.nio.channels.FileChannel
 import javax.inject.Inject
 
-/**
- * Implantation du backend de détection via TensorFlow Lite.
- *
- * Cette version utilise l'Interpreter TFLite classique (et non l'ImageClassifier
- * de la Task Library), ce qui ne nécessite PAS de metadata dans le modèle.
- *
- * - Le modèle (model.tflite) est dans assets/
- * - Les labels (labels.txt) sont dans assets/, un nom par ligne
- *
- * Séparation interface/implantation comme dans le cours (chapitre 5 - Hilt) :
- *   interface FruitDetector <-- FruitDetectorImpl (cette classe)
- *
- * Logs de diagnostic : filtrer "FruitDebug" dans Logcat.
- */
+
 class FruitDetectorImpl @Inject constructor(
     private val context: Context
 ) : FruitDetector {
@@ -37,36 +24,32 @@ class FruitDetectorImpl @Inject constructor(
     companion object {
         private const val TAG = "FruitDebug"
 
-        // Seuil de confiance minimum. Avec la classe "Autre", c'est le modèle
-        // qui distingue fruit/non-fruit, donc on peut garder un seuil raisonnable.
         private const val CONFIDENCE_THRESHOLD = 0.60f
 
-        // Fichiers dans assets/
+
         private const val MODEL_FILE = "model.tflite"
         private const val LABELS_FILE = "labels.txt"
 
-        // Taille d'entrée attendue par le modèle (MobileNetV2 = 224x224)
+
         private const val INPUT_SIZE = 224
 
-        // Nombre de résultats à afficher (top 3)
+
         private const val MAX_RESULTS = 3
     }
 
-    // Interpreter TFLite, initialisé une seule fois (lazy)
+
     private val interpreter: Interpreter by lazy {
         Log.d(TAG, "Chargement du modele : $MODEL_FILE")
         Interpreter(loadModelFile())
     }
 
-    // Liste des labels, chargée une seule fois depuis labels.txt
+
     private val labels: List<String> by lazy {
         Log.d(TAG, "Chargement des labels : $LABELS_FILE")
         loadLabels()
     }
 
-    /**
-     * Charge le fichier modèle depuis assets/ en mémoire.
-     */
+
     private fun loadModelFile(): ByteBuffer {
         val assetFileDescriptor = context.assets.openFd(MODEL_FILE)
         val inputStream = FileInputStream(assetFileDescriptor.fileDescriptor)
@@ -80,9 +63,7 @@ class FruitDetectorImpl @Inject constructor(
         )
     }
 
-    /**
-     * Charge les labels depuis assets/labels.txt (un nom par ligne).
-     */
+
     private fun loadLabels(): List<String> {
         val labelsList = mutableListOf<String>()
         context.assets.open(LABELS_FILE).use { inputStream ->
@@ -98,10 +79,7 @@ class FruitDetectorImpl @Inject constructor(
         return labelsList
     }
 
-    /**
-     * Analyse un Bitmap avec TFLite et retourne le résultat de détection.
-     * Exécutée sur Dispatchers.Default (cours chapitre 8 - Coroutines).
-     */
+
     override suspend fun detect(bitmap: Bitmap): FruitDetectionResult =
         withContext(Dispatchers.Default) {
 
@@ -189,12 +167,7 @@ class FruitDetectorImpl @Inject constructor(
             }
         }
 
-    /**
-     * Convertit un Bitmap 224x224 en ByteBuffer pour le modèle.
-     *
-     * Le modèle attend des float32. La normalisation (Rescaling) est
-     * intégrée DANS le modèle, donc on passe les valeurs brutes 0-255.
-     */
+
     private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
         // 4 octets par float, 3 canaux (RGB), INPUT_SIZE x INPUT_SIZE pixels
         val byteBuffer = ByteBuffer.allocateDirect(4 * INPUT_SIZE * INPUT_SIZE * 3)
@@ -218,11 +191,7 @@ class FruitDetectorImpl @Inject constructor(
         return byteBuffer
     }
 
-    /**
-     * Nettoie le nom du label pour l'affichage.
-     * Ex: "Apple Golden 1" -> "Apple Golden", "Tomato 5" -> "Tomato"
-     * Retire les numéros de variété en fin de nom.
-     */
+
     private fun formatFruitName(label: String): String {
         // Retire les chiffres isolés en fin de nom (numéros de variété)
         return label.trim()

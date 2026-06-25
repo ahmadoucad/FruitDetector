@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fichier : app/src/main/res/layout/fragment_result.xml -->
-<!-- Écran résultat : fiche détaillée du fruit/légume détecté -->
+
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +14,7 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Image scannée -->
+
         <ImageView
             android:id="@+id/scannedImageView"
             android:layout_width="match_parent"
@@ -25,7 +24,7 @@
             android:layout_marginBottom="16dp"
             android:background="#F0F0F0" />
 
-        <!-- Nom du fruit détecté (ou message si aucun fruit) -->
+
         <TextView
             android:id="@+id/fruitNameText"
             android:layout_width="match_parent"
@@ -36,7 +35,7 @@
             android:layout_marginBottom="8dp"
             tools:text="🍎 Pomme" />
 
-        <!-- Score de confiance -->
+
         <TextView
             android:id="@+id/confidenceText"
             android:layout_width="match_parent"
@@ -47,24 +46,21 @@
             android:layout_marginBottom="24dp"
             tools:text="Confiance : 97%" />
 
-        <!-- =================================================================
-             CONTENEUR DÉTAILS : tout ce qui ne s'affiche QUE si un fruit
-             est détecté (top 3, nutrition, bienfaits). Masqué sinon.
-             ================================================================= -->
+
         <LinearLayout
             android:id="@+id/detailsContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Séparateur -->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#E0E0E0"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Section : top 3 des résultats -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,14 +97,14 @@
                 android:layout_marginBottom="24dp"
                 tools:text="3. Prune — 1%" />
 
-            <!-- Séparateur -->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#E0E0E0"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Section : informations nutritionnelles -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,7 +114,7 @@
                 android:textColor="@color/fruit_text_primary"
                 android:layout_marginBottom="8dp" />
 
-            <!-- ProgressBar pendant le chargement de l'API -->
+
             <ProgressBar
                 android:id="@+id/nutritionLoadingProgress"
                 android:layout_width="wrap_content"
@@ -126,7 +122,7 @@
                 android:layout_gravity="center"
                 android:visibility="visible" />
 
-            <!-- Contenu nutritionnel -->
+
             <LinearLayout
                 android:id="@+id/nutritionContent"
                 android:layout_width="match_parent"
@@ -172,14 +168,14 @@
 
             </LinearLayout>
 
-            <!-- Séparateur -->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#E0E0E0"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Section : bienfaits -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -199,9 +195,7 @@
                 tools:text="✅ Bonne pour la digestion" />
 
         </LinearLayout>
-        <!-- ============ FIN CONTENEUR DÉTAILS ============ -->
 
-        <!-- Bouton retour à l'accueil (violet plein) -->
         <Button
             android:id="@+id/backToHomeButton"
             style="@style/FruitButton.Primary"
@@ -210,7 +204,7 @@
             android:text="@string/back_to_home_button"
             android:layout_marginBottom="8dp" />
 
-        <!-- Bouton scanner à nouveau (contour violet) -->
+
         <Button
             android:id="@+id/scanAgainButton"
             style="@style/FruitButton.Outlined"

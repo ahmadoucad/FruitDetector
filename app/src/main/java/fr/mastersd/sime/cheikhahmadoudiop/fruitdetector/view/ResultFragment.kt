@@ -1,5 +1,4 @@
-// Fichier : app/src/main/java/fr/mastersd/sime/cheikhahmadoudiop/fruitdetector/view/ResultFragment.kt
-// VERSION COMPLÈTE avec affichage de l'image scannée + données nutritionnelles
+
 
 package fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view
 
@@ -17,28 +16,16 @@ import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.model.FruitDetectionResu
 import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.model.NutritionInfo
 import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.viewmodel.FruitViewModel
 
-/**
- * Fragment de l'écran résultat.
- *
- * Observe les LiveData depuis le ViewModel partagé (activityViewModels) :
- * - scannedImage    : l'image analysée (affichée en haut)
- * - detectionResult : résultat TFLite (Detected / BelowThreshold)
- * - nutritionInfo   : données nutritionnelles depuis l'API Open Food Facts
- * - isLoadingNutrition : spinner pendant le chargement de l'API
- *
- * Respecte l'architecture MVVM du cours (chapitres 3 et 6).
- *
- * @AndroidEntryPoint pour Hilt (cours chapitre 5)
- */
+
 @AndroidEntryPoint
 class ResultFragment : Fragment() {
 
     private lateinit var binding: FragmentResultBinding
 
-    // ViewModel PARTAGÉ entre tous les fragments (activityViewModels)
+
     private val fruitViewModel: FruitViewModel by activityViewModels()
 
-    // Mémorise le nom du fruit actuellement détecté (pour les valeurs de repli)
+
     private var fruitCourant: String = ""
 
     override fun onCreateView(
@@ -53,22 +40,18 @@ class ResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // =====================================================================
-        // Observation 0 : image scannée (affichée en haut de l'écran)
-        // =====================================================================
+
         fruitViewModel.scannedImage.observe(viewLifecycleOwner) { bitmap ->
             if (bitmap != null) {
                 binding.scannedImageView.setImageBitmap(bitmap)
             }
         }
 
-        // =====================================================================
-        // Observation 1 : résultat de détection TFLite
-        // =====================================================================
+
         fruitViewModel.detectionResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is FruitDetectionResult.NotDetected -> {
-                    // État initial : on n'affiche rien et on ne navigue pas.
+
                 }
                 is FruitDetectionResult.BelowThreshold -> {
                     afficherEchecDetection()
@@ -79,62 +62,54 @@ class ResultFragment : Fragment() {
             }
         }
 
-        // =====================================================================
-        // Observation 2 : données nutritionnelles depuis l'API
-        // =====================================================================
+
         fruitViewModel.nutritionInfo.observe(viewLifecycleOwner) { nutritionInfo ->
             if (nutritionInfo != null) {
                 afficherNutritionApi(nutritionInfo)
             }
         }
 
-        // =====================================================================
-        // Observation 3 : chargement de l'API nutrition
-        // =====================================================================
+
         fruitViewModel.isLoadingNutrition.observe(viewLifecycleOwner) { isLoading ->
             binding.nutritionLoadingProgress.visibility =
                 if (isLoading) View.VISIBLE else View.GONE
         }
 
-        // Bouton retour à l'accueil
+
         binding.backToHomeButton.setOnClickListener {
             fruitViewModel.resetDetection()
             findNavController().navigate(R.id.homeFragment)
         }
 
-        // Bouton scanner à nouveau
+
         binding.scanAgainButton.setOnClickListener {
             fruitViewModel.resetDetection()
             findNavController().navigateUp()
         }
     }
 
-    // =========================================================================
-    // Méthodes privées d'affichage
-    // =========================================================================
+
 
     private fun afficherResultat(result: FruitDetectionResult.Detected) {
-        // Mémorise le fruit courant pour les valeurs de repli (stratégie hybride)
+
         fruitCourant = result.fruitName
 
-        // On AFFICHE toute la partie détails (top 3, nutrition, bienfaits)
+
         binding.detailsContent.visibility = View.VISIBLE
         binding.confidenceText.visibility = View.VISIBLE
 
-        // Nom principal : version simplifiée et traduite en français
-        // (ex: "Banana Lady Finger" -> "Banane")
+
         binding.fruitNameText.text = nomFrancaisSimple(result.fruitName)
         binding.fruitNameText.textSize = 28f
         binding.confidenceText.text = getString(
             R.string.confidence_text, result.confidence * 100
         )
 
-        // Réaffiche les éléments (au cas où ils auraient été masqués)
         binding.topResult1Text.visibility = View.VISIBLE
         binding.topResult2Text.visibility = View.VISIBLE
         binding.topResult3Text.visibility = View.VISIBLE
 
-        // Top 3 : on garde les labels DÉTAILLÉS du modèle (transparence technique)
+
         val topResults = result.topResults
         if (topResults.isNotEmpty()) {
             binding.topResult1Text.text =
@@ -155,19 +130,15 @@ class ResultFragment : Fragment() {
         afficherNutritionStatique(result.fruitName)
     }
 
-    /**
-     * STRATÉGIE HYBRIDE : combine les données de l'API et les valeurs codées.
-     * Pour chaque valeur : si l'API fournit une donnée valide (> 0), on l'affiche ;
-     * sinon, on garde la valeur codée (plus fiable pour les fruits frais).
-     */
+
     private fun afficherNutritionApi(info: NutritionInfo) {
         binding.nutritionContent.visibility = View.VISIBLE
         binding.nutritionLoadingProgress.visibility = View.GONE
 
-        // Valeurs codées de repli pour le fruit courant
+
         val (calStat, glucStat, fibStat, vitStat) = valeursCodees(fruitCourant)
 
-        // Pour chaque valeur : API si > 0, sinon valeur codée
+
         val calories = if (info.calories > 0f) info.calories else calStat
         val glucides = if (info.carbohydrates > 0f) info.carbohydrates else glucStat
         val fibres = if (info.fibers > 0f) info.fibers else fibStat
@@ -179,26 +150,18 @@ class ResultFragment : Fragment() {
         binding.vitaminCText.text = getString(R.string.vitamin_c_text, vitamineC)
     }
 
-    /**
-     * Affiche un message simple quand ce n'est PAS un fruit/légume.
-     * On masque toute la partie détails (top 3, nutrition, bienfaits)
-     * pour ne laisser que l'image et le message.
-     */
+
     private fun afficherEchecDetection() {
-        // Message simple et clair
+
         binding.fruitNameText.text = getString(R.string.below_threshold_message)
         binding.fruitNameText.textSize = 18f
 
-        // On masque le score de confiance et toute la section détails
+
         binding.confidenceText.visibility = View.GONE
         binding.detailsContent.visibility = View.GONE
     }
 
-    /**
-     * Retourne les valeurs nutritionnelles codées pour un fruit donné :
-     * (calories, glucides, fibres, vitamineC).
-     * Sert à la fois pour l'affichage initial et comme repli pour l'API.
-     */
+
     private fun valeursCodees(fruitName: String): List<Float> {
         return when {
             fruitName.contains("pomme", ignoreCase = true) ||
@@ -225,9 +188,7 @@ class ResultFragment : Fragment() {
         }
     }
 
-    /**
-     * Affiche les valeurs codées (utilisé en attendant la réponse de l'API).
-     */
+
     private fun afficherNutritionStatique(fruitName: String) {
         val (calories, glucides, fibres, vitamineC) = valeursCodees(fruitName)
         binding.caloriesText.text = getString(R.string.calories_text, calories)
@@ -236,16 +197,8 @@ class ResultFragment : Fragment() {
         binding.vitaminCText.text = getString(R.string.vitamin_c_text, vitamineC)
     }
 
-    /**
-     * Transforme un label brut du modèle en nom français simple.
-     * On prend le premier mot (type de base) et on le traduit.
-     *   "Banana Lady Finger" -> "Banane"
-     *   "Apple Golden 1"      -> "Pomme"
-     *   "Onion Red 2"         -> "Oignon"
-     *   "Tomato Cherry Red"   -> "Tomate"
-     */
+
     private fun nomFrancaisSimple(label: String): String {
-        // Premier mot significatif (sans les chiffres)
         val base = label.lowercase().trim()
             .split(" ")
             .firstOrNull { it.isNotBlank() && !it.matches(Regex("\\d+")) }
@@ -291,7 +244,6 @@ class ResultFragment : Fragment() {
             "walnut" -> "Noix"
             "hazelnut" -> "Noisette"
             "chestnut" -> "Châtaigne"
-            // Si pas de traduction connue : on met une majuscule au mot de base
             else -> base.replaceFirstChar { it.uppercase() }
         }
     }

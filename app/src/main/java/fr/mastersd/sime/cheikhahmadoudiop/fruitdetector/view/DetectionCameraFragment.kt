@@ -29,17 +29,6 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
-/**
- * Détection YOLO en TEMPS RÉEL via la caméra.
- *
- * Chaque image du flux caméra est analysée par YOLO, et les cadres des
- * objets détectés sont dessinés en direct par-dessus le flux.
- *
- * Pour rester fluide, on n'analyse pas toutes les images simultanément :
- * une nouvelle analyse n'est lancée que si la précédente est terminée.
- *
- * @AndroidEntryPoint pour Hilt (cours chapitre 5)
- */
 @AndroidEntryPoint
 class DetectionCameraFragment : Fragment() {
 
@@ -130,9 +119,7 @@ class DetectionCameraFragment : Fragment() {
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
-    /**
-     * Analyse une image du flux caméra avec YOLO.
-     */
+
     private fun analyzeImage(imageProxy: ImageProxy) {
         if (isAnalyzing) {
             imageProxy.close()
@@ -164,10 +151,6 @@ class DetectionCameraFragment : Fragment() {
         }
     }
 
-    /**
-     * Fait pivoter un Bitmap selon l'angle de rotation de la caméra.
-     * Nécessaire car la caméra envoie souvent l'image tournée de 90°.
-     */
     private fun Bitmap.pivoter(degres: Int): Bitmap {
         if (degres == 0) return this
         val matrix = Matrix().apply { postRotate(degres.toFloat()) }

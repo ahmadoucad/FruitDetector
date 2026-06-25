@@ -1,4 +1,4 @@
-// Fichier : app/src/main/java/fr.mastersd.sime.cheikhahmadoudiop.fruitdetector/view/CameraFragment.kt
+
 
 package fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view
 
@@ -29,25 +29,17 @@ import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.viewmodel.FruitViewModel
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-/**
- * Fragment de la caméra en temps réel (CameraX).
- *
- * Respecte l'architecture MVVM du cours :
- * - onCreateView() : gonfle le layout
- * - onViewCreated() : communication avec le ViewModel
- *
- * @AndroidEntryPoint pour Hilt (cours chapitre 5)
- */
+
 @AndroidEntryPoint
 class CameraFragment : Fragment() {
 
     private lateinit var binding: FragmentCameraBinding
     private val fruitViewModel: FruitViewModel by activityViewModels()
 
-    // Executor dédié pour l'analyse des images (thread séparé)
+    // Executor dédié pour l'analyse des images
     private lateinit var cameraExecutor: ExecutorService
 
-    // Indique si une analyse est déjà en cours (évite les analyses simultanées)
+    // Indique si une analyse est déjà en cours
     private var isAnalyzing = false
 
     // Demande de permission caméra
@@ -137,11 +129,7 @@ class CameraFragment : Fragment() {
         }
     }
 
-    /**
-     * Démarre CameraX avec Preview + ImageAnalysis.
-     * Preview : affiche le flux dans le PreviewView.
-     * ImageAnalysis : envoie chaque frame au ViewModel pour analyse TFLite.
-     */
+
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
@@ -181,25 +169,18 @@ class CameraFragment : Fragment() {
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
-    /**
-     * Analyse une image du flux caméra.
-     * N'envoie pas au ViewModel si une analyse est déjà en cours
-     * (évite la surcharge de requêtes TFLite).
-     */
+
     private fun analyzeImage(imageProxy: ImageProxy) {
         if (!isAnalyzing) {
             isAnalyzing = true
             val bitmap = imageProxy.toBitmap()
-            // Envoi au ViewModel (qui gère les coroutines sur Dispatchers.Default)
             fruitViewModel.detect(bitmap)
         }
-        // Important : toujours fermer l'ImageProxy
         imageProxy.close()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Arrêt de l'executor CameraX quand le fragment est détruit
         cameraExecutor.shutdown()
     }
 }

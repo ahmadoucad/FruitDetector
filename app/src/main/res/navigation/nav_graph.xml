@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fichier : app/src/main/res/navigation/nav_graph.xml -->
-<!-- Graphe de navigation entre les fragments (cours chapitre 6) -->
+
 
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,29 +8,29 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
-    <!-- Écran d'accueil : point de départ -->
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
 
-        <!-- Navigation vers la caméra -->
+
         <action
             android:id="@+id/action_homeFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
 
-        <!-- Navigation vers le résultat (depuis galerie) -->
+
         <action
             android:id="@+id/action_homeFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
 
-        <!-- Navigation vers l'historique -->
+
         <action
             android:id="@+id/action_homeFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
 
-        <!-- Navigation vers la détection YOLO -->
+
         <action
             android:id="@+id/action_homeFragment_to_detectionFragment"
             app:destination="@id/detectionFragment" />

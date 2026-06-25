@@ -1,4 +1,4 @@
-// Fichier : app/src/main/java/fr/mastersd/sime/cheikhahmadoudiop/fruitdetector/view/DetectionFragment.kt
+
 
 package fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view
 
@@ -23,19 +23,7 @@ import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.model.YoloDetector
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * Fragment de DÉTECTION (partie 2 du projet).
- *
- * Contrairement à la classification (1 fruit), la détection YOLO trouve
- * PLUSIEURS objets dans une image et dessine un cadre autour de chacun.
- *
- * Flux :
- *   1. L'utilisateur choisit une image
- *   2. YoloDetector analyse l'image -> liste d'objets (boîtes)
- *   3. BoxOverlayView dessine les cadres par-dessus l'image
- *
- * @AndroidEntryPoint pour Hilt (cours chapitre 5)
- */
+
 @AndroidEntryPoint
 class DetectionFragment : Fragment() {
 
@@ -103,9 +91,7 @@ class DetectionFragment : Fragment() {
         }
     }
 
-    /**
-     * Affiche l'image et lance la détection YOLO en arrière-plan.
-     */
+
     private fun lancerDetection(bitmap: Bitmap) {
         // Affiche l'image tout de suite
         binding.detectionImageView.setImageBitmap(bitmap)

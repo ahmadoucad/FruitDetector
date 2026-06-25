@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fichier : app/src/main/res/values/styles_fruitscan.xml -->
-<!-- Styles unifiés pour les boutons (cohérents avec l'authentification) -->
+
 
 <resources>
 
-    <!-- Bouton principal : violet pastel plein (comme "Se connecter") -->
+
     <style name="FruitButton.Primary" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/fruit_purple</item>
         <item name="android:textColor">@color/fruit_purple_text</item>
@@ -16,7 +15,6 @@
         <item name="elevation">0dp</item>
     </style>
 
-    <!-- Bouton secondaire : contour violet (comme "Créer un compte") -->
     <style name="FruitButton.Outlined" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:textColor">@color/fruit_purple_text</item>
         <item name="strokeColor">@color/fruit_purple</item>

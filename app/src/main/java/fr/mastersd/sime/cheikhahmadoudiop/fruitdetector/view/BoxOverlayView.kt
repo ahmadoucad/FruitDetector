@@ -1,4 +1,4 @@
-// Fichier : app/src/main/java/fr/mastersd/sime/cheikhahmadoudiop/fruitdetector/view/BoxOverlayView.kt
+
 
 package fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view
 
@@ -11,14 +11,7 @@ import android.util.AttributeSet
 import android.view.View
 import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.model.DetectionBox
 
-/**
- * Vue personnalisée qui dessine les boîtes de détection YOLO par-dessus l'image.
- *
- * On la superpose à l'ImageView : l'image en dessous, les cadres au-dessus.
- *
- * Les coordonnées des boîtes sont normalisées (0 à 1), donc on les multiplie
- * par la taille de la vue pour obtenir les pixels à dessiner.
- */
+
 class BoxOverlayView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -36,7 +29,7 @@ class BoxOverlayView @JvmOverloads constructor(
         isAntiAlias = true
     }
 
-    // Pinceau pour le fond du texte (étiquette)
+    // Pinceau pour le fond du texte
     private val textBackgroundPaint = Paint().apply {
         color = Color.parseColor("#C4B5F0")
         style = Paint.Style.FILL
@@ -51,17 +44,13 @@ class BoxOverlayView @JvmOverloads constructor(
         isAntiAlias = true
     }
 
-    /**
-     * Met à jour les boîtes à dessiner et redessine la vue.
-     */
+
     fun setBoxes(nouvellesBoxes: List<DetectionBox>) {
         boxes = nouvellesBoxes
         invalidate()  // demande à Android de redessiner
     }
 
-    /**
-     * Efface toutes les boîtes.
-     */
+
     fun clear() {
         boxes = emptyList()
         invalidate()

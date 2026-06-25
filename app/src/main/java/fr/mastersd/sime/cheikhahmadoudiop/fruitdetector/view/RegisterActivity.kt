@@ -1,4 +1,4 @@
-// Fichier : app/src/main/java/fr/mastersd/sime/cheikhahmadoudiop/fruitdetector/view/RegisterActivity.kt
+
 
 package fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view
 
@@ -11,12 +11,6 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.databinding.ActivityRegisterBinding
 
-/**
- * Écran d'inscription (création de compte).
- *
- * Valide les champs (remplis, mots de passe identiques, longueur >= 6),
- * crée le compte via Firebase, enregistre le nom, puis va à MainActivity.
- */
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
 

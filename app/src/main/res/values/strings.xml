@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fichier : app/src/main/res/values/strings.xml -->
+
 
 <resources>
     <string name="app_name">Fruit Detector</string>
     <string name="app_title"> Fruit Detector</string>
     <string name="app_subtitle">Identifiez vos fruits et légumes\nen un instant</string>
 
-    <!-- Boutons accueil -->
+
     <string name="gallery_button_text">Choisir depuis la galerie</string>
     <string name="camera_button_text">Scanner avec la caméra</string>
     <string name="history_button_text">Voir l\'historique</string>
 
-    <!-- Écran caméra -->
+
     <string name="no_detection_message">Pointez la caméra vers un seul fruit ou légume</string>
     <string name="view_details_button">Voir la fiche complète</string>
 
-    <!-- Écran résultat -->
+
     <string name="top_results_title">Top résultats</string>
     <string name="nutrition_title">Informations nutritionnelles</string>
     <string name="benefits_title">Bienfaits</string>
     <string name="back_to_home_button">Retour à l\'accueil</string>
     
-    <!-- Détection YOLO -->
-    <string name="detection_title">🔍 Détection d\'objets</string>
-    <string name="detection_button_text">🔍 Détecter plusieurs objets</string>
+
+    <string name="detection_title"> Détection d\'objets</string>
+    <string name="detection_button_text"> Détecter plusieurs objets</string>
     <string name="detection_in_progress">Analyse en cours…</string>
     <string name="detection_none">Aucun objet détecté</string>
     <string name="detection_count">%1$d objet(s) détecté(s)</string>
@@ -33,14 +33,14 @@
     <string name="confidence_text">Confiance : %1$.0f%%</string>
     <string name="below_threshold_message">Aucun fruit ou légume détecté</string>
 
-    <!-- Informations nutritionnelles -->
+
     <string name="calories_text">🔥 Calories : %1$.0f kcal</string>
     <string name="carbs_text">🍞 Glucides : %1$.1f g</string>
     <string name="fibers_text">🌿 Fibres : %1$.1f g</string>
     <string name="vitamin_c_text">💊 Vitamine C : %1$.0f mg</string>
     <string name="nutrition_unavailable">Données nutritionnelles non disponibles</string>
 
-    <!-- Écran historique -->
+
     <string name="empty_history_message">Aucun scan effectué pour l\'instant.\nCommencez par scanner un fruit ou légume !</string>
     <string name="clear_history_button">Supprimer l\'historique</string>
     <string name="history_confidence_text">%1$.0f%%</string>
@@ -49,9 +49,9 @@
     <string name="camera_permission_denied">Permission caméra refusée. Veuillez l\'autoriser dans les paramètres.</string>
     <string name="gallery_permission_denied">Permission galerie refusée. Veuillez l\'autoriser dans les paramètres.</string>
     
-    <string name="detection_camera_button">📷 Détecter avec la caméra</string>
+    <string name="detection_camera_button"> Détecter avec la caméra</string>
     
-    <!-- Authentification (Login / Register) -->
+
     <string name="login_subtitle">Connectez-vous pour commencer</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Mot de passe</string>
@@ -63,7 +63,7 @@
     <string name="register_button">S\'inscrire</string>
     <string name="login_link">Déjà un compte ? Se connecter</string>
 
-    <!-- Détection -->
+
     <string name="logout_button">Se déconnecter</string>
 
 </resources>

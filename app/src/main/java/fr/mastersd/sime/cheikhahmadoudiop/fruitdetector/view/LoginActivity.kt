@@ -1,4 +1,4 @@
-// Fichier : app/src/main/java/fr/mastersd/sime/cheikhahmadoudiop/fruitdetector/view/LoginActivity.kt
+
 
 package fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.view
 
@@ -10,15 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.databinding.ActivityLoginBinding
 
-/**
- * Écran de connexion (point d'entrée de l'application).
- *
- * Au démarrage, vérifie si un utilisateur est déjà connecté :
- *   - Si oui  -> va directement à MainActivity
- *   - Si non  -> affiche le formulaire de connexion
- *
- * Utilise Firebase Authentication (email + mot de passe).
- */
+
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
@@ -32,13 +24,12 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        // Si déjà connecté, on saute la connexion
+
         if (auth.currentUser != null) {
             navigateToMain()
             return
         }
 
-        // Bouton de connexion
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
@@ -64,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
 
-        // Lien vers l'inscription
+
         binding.registerLink.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }

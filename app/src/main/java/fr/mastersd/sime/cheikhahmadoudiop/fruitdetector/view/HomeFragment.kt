@@ -25,26 +25,16 @@ import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.R
 import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.databinding.FragmentHomeBinding
 import fr.mastersd.sime.cheikhahmadoudiop.fruitdetector.viewmodel.FruitViewModel
 
-/**
- * Fragment de l'écran d'accueil.
- *
- * Respecte l'architecture MVVM du cours (chapitre 6 - Fragments) :
- * - onCreateView() : gonfle le layout avec View Binding
- * - onViewCreated() : communication avec le ViewModel et gestion des événements
- *
- * @AndroidEntryPoint pour Hilt (cours chapitre 5)
- * by viewModels() pour récupérer le ViewModel (cours chapitre 6)
- */
+
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    // View Binding : propriété de la classe car utilisée dans onViewCreated()
-    // comme dans le cours chapitre 6
+
     private lateinit var binding: FragmentHomeBinding
 
-    // Injection du ViewModel par conteneur Hilt (cours chapitre 5 et 6)
+
     private val fruitViewModel: FruitViewModel by activityViewModels()
-    // Lanceur pour sélectionner une image depuis la galerie
+
     private val galleryLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -64,16 +54,13 @@ class HomeFragment : Fragment() {
                         requireContext().contentResolver, uri
                     )
                 }
-                // Envoi du Bitmap au ViewModel pour détection
+
                 fruitViewModel.detect(bitmap)
             }
         }
     }
 
-    /**
-     * Gonfle le layout du fragment.
-     * Comme dans le cours chapitre 6 : onCreateView() retourne la vue racine.
-     */
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,14 +70,11 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    /**
-     * Communication avec le ViewModel et gestion des clics.
-     * Comme dans le cours chapitre 6 : tout se passe dans onViewCreated().
-     */
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Bouton galerie : ouvre le sélecteur d'image
+
         binding.galleryButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK).apply {
                 type = "image/*"
@@ -98,7 +82,7 @@ class HomeFragment : Fragment() {
             galleryLauncher.launch(intent)
         }
 
-        // Bouton caméra : navigation vers CameraFragment
+
         binding.cameraButton.setOnClickListener {
             findNavController().navigate(
                 R.id.action_homeFragment_to_cameraFragment
@@ -106,34 +90,31 @@ class HomeFragment : Fragment() {
         }
 
 
-        // Bouton détection : navigation vers DetectionFragment (YOLO)
+
         binding.detectionButton.setOnClickListener {
             findNavController().navigate(
                 R.id.action_homeFragment_to_detectionFragment
             )
         }
 
-        // Bouton historique : navigation vers HistoryFragment
+
         binding.historyButton.setOnClickListener {
             findNavController().navigate(
                 R.id.action_homeFragment_to_historyFragment
             )
         }
 
-        // Bouton de déconnexion
+
         binding.logoutButton.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            // Retour à l'écran de connexion
+
             val intent = Intent(requireContext(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             requireActivity().finish()
         }
 
-        // Observation de l'événement de navigation (one-shot)
-        // Le ViewModel déclenche la navigation une seule fois quand la
-        // détection est terminée. getContentIfNotHandled() garantit qu'on
-        // ne navigue pas en boucle au retour sur l'accueil.
+
         fruitViewModel.navigateToResult.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 findNavController().navigate(
@@ -142,7 +123,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Observation de l'état de chargement
+
         fruitViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.galleryButton.isEnabled = !isLoading
             binding.cameraButton.isEnabled = !isLoading
